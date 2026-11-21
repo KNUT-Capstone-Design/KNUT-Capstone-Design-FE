@@ -6,7 +6,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: { default: "안심링크", template: "%s | 안심링크" },
-  description: "URL, 문자, QR 코드의 스미싱 위험 요소를 확인하세요.",
+  description: "URL, 문자, QR 코드의 스미싱 위험 요소를 확인하세요.", 
 };
 
 export default function RootLayout({
