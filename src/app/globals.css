@@ -26,13 +26,26 @@ a, button, input { outline-color: #2563eb; outline-offset: 3px; }
 .password-input button { position: absolute; right: 5px; top: 3px; padding: 10px 12px; min-height: 44px; border-radius: 8px; color: #475569; font-size: 13px; cursor: pointer; }
 .password-input button:hover { background: #f4f7fa; }
 .auth-error { margin-top: 8px; font-size: 13px; color: #b91c1c; }
+.auth-help { margin-top: 8px; font-size: 13px; color: #64748b; }
 .auth-notice { border-radius: 12px; padding: 16px; background: #f4f7fa; color: #475569; font-size: 14px; line-height: 1.8; }
 .auth-submit { width: 100%; border: 0; cursor: pointer; margin-top: 4px; }
+.auth-submit:disabled { cursor: wait; background: #94a3b8; }
 .auth-switch { margin-top: 24px; text-align: center; font-size: 14px; color: #56616e; }
 .auth-switch a { margin-left: 8px; color: #1d4ed8; font-weight: 600; display: inline-flex; align-items: center; min-height: 44px; }
 .auth-guest { margin-top: 30px; border-top: 1px solid #e2e7ed; padding-top: 24px; font-size: 13px; color: #56616e; line-height: 1.8; }
 .auth-guest a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: underline; text-underline-offset: 4px; }
+.header-account { display: flex; align-items: center; gap: 8px; margin-left: 8px; }
+.header-user { display: flex; align-items: center; gap: 7px; max-width: 190px; color: #475569; font-size: 12px; }
+.header-user span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.header-user b { flex: none; border-radius: 999px; background: #e8effa; padding: 3px 7px; color: #1e3a8a; font-size: 11px; }
+.header-logout { min-height: 44px; padding: 0 10px; border-radius: 10px; color: #475569; font-size: 13px; cursor: pointer; }
+.header-logout:hover { background: #f1f5f9; }
 @media (max-width: 767px) { .auth-page { padding-block: 36px 48px; } }
+@media (max-width: 767px) {
+  .header-account { align-items: stretch; flex-direction: column; margin: 8px 0 0; border-top: 1px solid #e2e8f0; padding-top: 12px; }
+  .header-user { max-width: none; padding-inline: 10px; }
+  .header-logout { text-align: left; }
+}
 @media (min-width: 768px) { .page-container { width: min(100% - 64px, 1120px); } }
 
 .home h1, .home h2, .home h3 { word-break: keep-all; letter-spacing: -.04em; }

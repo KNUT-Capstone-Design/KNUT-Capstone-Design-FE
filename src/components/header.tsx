@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useAuth } from "@/contexts/auth-context";
 
 const navItems = [
   ["/analyze/url", "URL 검사"], ["/analyze/message", "문자 검사"],
@@ -10,6 +11,7 @@ const navItems = [
 
 export function Header() {
   const pathname = usePathname();
+  const auth = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   useEffect(() => {
     const close = (event: KeyboardEvent) => { if (event.key === "Escape") setIsOpen(false); };
@@ -29,7 +31,17 @@ export function Header() {
             const current = pathname === href;
             return <Link key={href} href={href} onClick={() => setIsOpen(false)} aria-current={current ? "page" : undefined} className={`px-4 py-3 text-sm font-semibold ${current ? "text-blue-700 underline underline-offset-8" : "text-slate-600 hover:bg-slate-100 hover:text-slate-950"}`}>{label}</Link>;
           })}
-          <Link href="/login" onClick={() => setIsOpen(false)} aria-current={pathname === "/login" ? "page" : undefined} className="mx-2 mt-2 rounded-xl border border-slate-200 px-4 py-3 text-sm font-medium text-slate-600 hover:bg-slate-50 md:mt-0">로그인</Link>
+          {auth.status === "authenticated" && auth.user ? (
+            <div className="header-account">
+              <span className="header-user">
+                {auth.user.role === "admin" && <b>관리자</b>}
+                <span>{auth.user.email}</span>
+              </span>
+              <button type="button" onClick={() => void auth.logout()} className="header-logout">로그아웃</button>
+            </div>
+          ) : (
+            <Link href="/login" onClick={() => setIsOpen(false)} aria-current={pathname === "/login" || pathname === "/signup" ? "page" : undefined} className="mx-2 mt-2 rounded-xl border border-slate-200 px-4 py-3 text-sm font-medium text-slate-600 hover:bg-slate-50 md:mt-0">로그인</Link>
+          )}
         </nav>
       </div>
     </header>

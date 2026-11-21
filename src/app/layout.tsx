@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Header } from "@/components/header";
 import { AnalysisProvider } from "@/contexts/analysis-context";
+import { AuthProvider } from "@/contexts/auth-context";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -16,16 +17,18 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body>
-        <AnalysisProvider>
-          <Header />
-          {children}
-          <footer className="border-t border-slate-200 bg-white">
-            <div className="page-container flex flex-col gap-2 py-8 text-sm text-slate-600 sm:flex-row sm:items-center sm:justify-between">
-              <p>분석 결과는 참고 정보이며 대상의 안전을 보장하지 않습니다.</p>
-              <p>검사 원문과 이미지는 DB에 저장하지 않습니다.</p>
-            </div>
-          </footer>
-        </AnalysisProvider>
+        <AuthProvider>
+          <AnalysisProvider>
+            <Header />
+            {children}
+            <footer className="border-t border-slate-200 bg-white">
+              <div className="page-container flex flex-col gap-2 py-8 text-sm text-slate-600 sm:flex-row sm:items-center sm:justify-between">
+                <p>분석 결과는 참고 정보이며 대상의 안전을 보장하지 않습니다.</p>
+                <p>검사 원문과 이미지는 DB에 저장하지 않습니다.</p>
+              </div>
+            </footer>
+          </AnalysisProvider>
+        </AuthProvider>
       </body>
     </html>
   );

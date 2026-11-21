@@ -19,7 +19,9 @@ export class AnalysisApiError extends Error {
   constructor(message: string, public readonly field: string | null = null, public readonly retryable = false) { super(message); }
 }
 export async function analyzeUrl(url: string, signal: AbortSignal): Promise<UrlAnalysisResponse> {
-  const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL?.replace(/\/$/, "");
+  const configured = process.env.NEXT_PUBLIC_API_BASE_URL;
+  const baseUrl = (configured ?? (process.env.NODE_ENV === "development" ? "http://localhost:8000" : ""))
+    .replace(/\/$/, "");
   if (!baseUrl) throw new AnalysisApiError("분석 서버 주소가 설정되지 않았습니다. 잠시 후 다시 시도해 주세요.", null, true);
   let response: Response;
   try {
